@@ -1,4 +1,3 @@
-use std::array;
 
 fn main() {
     // IF ELSE
