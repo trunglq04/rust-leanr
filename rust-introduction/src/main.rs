@@ -1,4 +1,3 @@
-use std::{array, backtrace};
 
 fn main() {
     // VARIABLES AND DATATYPES
@@ -66,4 +65,5 @@ fn main() {
     println!("Z: {z}");
     println!("W: {w}");
     println!("Q: {q}");
+
 }
