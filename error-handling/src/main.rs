@@ -80,11 +80,11 @@ enum CustomError {
 }
 
 // When using `?` the function return type must be in Result<T, Error>
-// If apply custom error we have to map custom error to error type
+// If apply custom error we have to map custom error to error type (case: unwrap to get value)
 fn read_file_contents2(path: &str) -> Result<String, CustomError> {
     let mut file = File::open(path)
         .map_err(|_| CustomError::FileOpenError)?;
-    
+
     let mut contents = String::new();
 
     file.read_to_string(&mut contents)
