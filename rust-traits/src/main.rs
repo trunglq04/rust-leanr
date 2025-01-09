@@ -1,3 +1,5 @@
+use std::fmt;
+
 fn main() {
     let vios = Car {
         category: "Sedan".to_string(),
@@ -72,7 +74,8 @@ fn main() {
     // Dynamic dispatch
     println!("=================Dynamic Dispatch=================");
     let shapes: Vec<&dyn Drawable> = vec![&circle, &rectangle];
-    draw_dynamic(&shapes);
+
+    draw_dynamic_vec(&shapes);
 }
 
 pub struct Bicycle {
@@ -270,6 +273,28 @@ fn draw_static_rec(shape: &Rectangle) {
 }
 
 fn draw_dynamic(shapes: &[&dyn Drawable]) {
+    for shape in shapes {
+        shape.draw();
+    }
+}
+
+// Custom Error Type
+#[derive(Debug)]
+enum DrawError {
+    InvalidShape(String),
+    DrawingFailed(String),
+}
+
+impl fmt::Display for DrawError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            DrawError::InvalidShape(msg) => write!(f, "Invalid shape: {}", msg),
+            DrawError::DrawingFailed(msg) => write!(f, "Drawing failed: {}", msg),
+        }
+    }
+}
+
+fn draw_dynamic_vec(shapes: &[&dyn Drawable]) {
     for shape in shapes {
         shape.draw();
     }
