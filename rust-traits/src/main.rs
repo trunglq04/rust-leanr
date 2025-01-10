@@ -156,8 +156,11 @@ fn get_vehicle(vehicle_type: &str) -> Box<dyn Vehicle> {
         "Car" => Box::new(Car {
             category: String::from("Car"),
         }),
-        _ => Box::new(Motorbike {
+        "Motorbike" => Box::new(Motorbike {
             category: String::from("Motorbike"),
+        }),
+        _ => Box::new(Motorbike {
+            category: String::from("Fake Motorbike"),
         }),
     }
 }
@@ -166,7 +169,7 @@ trait Insurable {
     fn insurance_name(&self) -> String;
 }
 
-// trait as param
+// traits as params
 fn print_insurance_info(item: &(impl Vehicle + Insurable)) {
     println!(
         "{} is insured by {}",
